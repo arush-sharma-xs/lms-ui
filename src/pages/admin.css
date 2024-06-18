@@ -1,0 +1,15 @@
+#main__container {
+  margin-top: 30px;
+}
+
+#nav-links {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  justify-content: center;
+  color: black;
+}
+
+#nav-links a {
+  color: black;
+}
