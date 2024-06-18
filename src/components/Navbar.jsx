@@ -1,10 +1,16 @@
 import "./navbar.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../assets/logo.png";
-import { useState } from "react";
+import useLogged from "../hooks/useLogged";
 
 const Navbar = () => {
-  const [logged, setLogged] = useState(true);
+  const logged = useLogged();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("currentUser");
+    navigate("/");
+  };
 
   return (
     <header id="header">
@@ -28,16 +34,19 @@ const Navbar = () => {
       {logged && (
         <ul id="navigations">
           <li>
-            <Link to="/addbook">Add Book</Link>
+            <Link to="/addbook">Add Books</Link>
           </li>
           <li>
-            <Link to="/allbooks">Book List</Link>
+            <Link to="/allbooks">All Books</Link>
+          </li>
+          <li>
+            <Link to="/updatebooks">Update Books</Link>
           </li>
           <li>
             <Link to="/listissues">List Issues</Link>
           </li>
           <li>
-            <button>Logout</button>
+            <button onClick={handleLogout}>Logout</button>
           </li>
         </ul>
       )}

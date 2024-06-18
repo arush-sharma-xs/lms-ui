@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./login.css";
 import { useNavigate } from "react-router-dom";
+import { FromLoginButton } from "./Buttons";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -12,7 +13,7 @@ const Login = () => {
     let emailRegex = /^[a-zA-Z][a-zA-Z0-9.]+@[a-zA-Z]+[.](com|in|edu)/;
 
     if (!emailRegex.test(email)) {
-      error.textContent = "enter valid Email Id";
+      error.textContent = "Enter valid Email Id";
       return;
     }
 
@@ -65,7 +66,7 @@ const Login = () => {
             autoFocus
           />
         </div>
-        <button type="submit">Login</button>
+        <FromLoginButton />
       </form>
       <p id="error"></p>
     </div>
