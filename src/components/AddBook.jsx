@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import "./addbook.css";
 
 const AddBook = () => {
@@ -8,6 +8,8 @@ const AddBook = () => {
   const [version, setVersion] = useState(null);
   const [totalCopies, setTotalCopies] = useState(null);
   const [error, setError] = useState("");
+
+  const ref = useRef();
 
   const handleAddBook = async (e) => {
     setError("");
@@ -80,6 +82,7 @@ const AddBook = () => {
     if (response.status == 200) {
       const { status } = await response.json();
       window.alert(status);
+      ref.current.reset();
     } else {
       const { error } = await response.json();
       window.alert(error);
@@ -89,7 +92,7 @@ const AddBook = () => {
   return (
     <div id="main__container">
       <h2>LMS - Add Book To library</h2>
-      <form action="#" onSubmit={handleAddBook} id="addBookForm">
+      <form action="#" ref={ref} onSubmit={handleAddBook} id="addBookForm">
         <div>
           <label htmlFor="title">Title:</label>
           <input

@@ -5,8 +5,6 @@ import { FromLoginButton } from "./Buttons";
 
 const Login = () => {
   const [email, setEmail] = useState("");
-  const navigate = useNavigate();
-
   const handleLogin = async (e) => {
     e.preventDefault();
 
@@ -28,23 +26,12 @@ const Login = () => {
     const result = await res.json();
 
     if (res.status === 200) {
-      const user = result.userData;
+      localStorage.setItem("currentUser", JSON.stringify(result));
 
-      console.log(user);
-
-      localStorage.setItem(
-        "currentUser",
-        JSON.stringify({
-          id: parseInt(user.ID),
-          libId: 1,
-          email: user.email,
-        })
-      );
-
-      if (user.role == "admin") {
-        navigate("/admin");
+      if (result.userType == "admin") {
+        window.location.href = "/admin"
       } else {
-        navigate("/reader");
+        window.location.href = "/reader"
       }
     } else {
       document.getElementById("error").textContent = result.error;
