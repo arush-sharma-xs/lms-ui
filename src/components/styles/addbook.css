@@ -1,0 +1,12 @@
+#main__container {
+  margin-top: 10px;
+}
+
+#addBookForm {
+  display: flex;
+  margin-top: 10px;
+}
+
+#addBookForm div {
+  width: 100%;
+}

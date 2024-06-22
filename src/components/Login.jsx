@@ -1,17 +1,20 @@
 import { useState } from "react";
-import "./login.css";
-import { useNavigate } from "react-router-dom";
+import "./styles/login.css";
 import { FromLoginButton } from "./Buttons";
+import ErrorAlert from "./ErrorAlert";
 
 const Login = () => {
   const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
+
   const handleLogin = async (e) => {
     e.preventDefault();
+    setError("");
 
     let emailRegex = /^[a-zA-Z][a-zA-Z0-9.]+@[a-zA-Z]+[.](com|in|edu)/;
 
     if (!emailRegex.test(email)) {
-      error.textContent = "Enter valid Email Id";
+      setError("Enter valid Email Id");
       return;
     }
 
@@ -29,12 +32,12 @@ const Login = () => {
       localStorage.setItem("currentUser", JSON.stringify(result));
 
       if (result.userType == "admin") {
-        window.location.href = "/admin"
+        window.location.href = "/admin";
       } else {
-        window.location.href = "/reader"
+        window.location.href = "/reader";
       }
     } else {
-      document.getElementById("error").textContent = result.error;
+      setError(result.error);
     }
   };
 
@@ -55,7 +58,8 @@ const Login = () => {
         </div>
         <FromLoginButton />
       </form>
-      <p id="error"></p>
+
+      {error && <ErrorAlert value={error} />}
     </div>
   );
 };

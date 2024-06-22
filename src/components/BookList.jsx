@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./booklist.css";
+import "./styles/booklist.css";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -15,7 +15,7 @@ const BookList = () => {
   }, []);
 
   const handleEdit = (bookId) => {
-    navigate(`/update/${bookId}`);
+    navigate(`/updateBooks/${bookId}`);
   };
 
   const handleRemove = (bookId) => {

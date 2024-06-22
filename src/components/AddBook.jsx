@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
-import "./addbook.css";
+import "./styles/addbook.css";
+import ErrorAlert from "./ErrorAlert";
 
 const AddBook = () => {
   const [title, setTitle] = useState(null);
@@ -145,8 +146,8 @@ const AddBook = () => {
             required
           />
         </div>
-        {error && <p>{error}</p>}
         <br />
+        {error && <ErrorAlert value={error} />}
         <button type="submit">Add Book</button>
       </form>
     </div>
